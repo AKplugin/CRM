@@ -95,6 +95,8 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px; }
+  .dashboard-area-element .staff-nav-search {
+    width: 50%; }
   .dashboard-area-element .bread-nav {
     font-size: 12px; }
     .dashboard-area-element .bread-nav ol {

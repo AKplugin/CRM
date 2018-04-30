@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
 import { Input, Select, Icon, Avatar, Popconfirm, message, Modal, notification, Card, Col, Row, Form } from 'antd';
 import ListComponent from '../Staffs/listComponent';
+import TableComponent from '../Staffs/tableComponent';
 const { Meta } = Card;
 const Search = Input.Search;
 const { Item } = Form;
@@ -21,11 +22,18 @@ class StaffListComponent extends Component {
                 qualification: '',
                 email: ''
             },
-            displayType: 'grid'
+            displayType: true
         };
         this.showForm = this.showForm.bind(this);
         this.addTeacher = this.addTeacher.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
+        this.changeDisplay = this.changeDisplay.bind(this);
+    }
+
+    changeDisplay(){
+        this.setState({
+            displayType: !this.state.displayType
+        });
     }
 
     onSearch(event) {
@@ -77,8 +85,8 @@ class StaffListComponent extends Component {
             <div>
                 <div className="staff-nav-bar">
                     <button onClick={this.showForm}>Add Staff</button>
-                    <Search placeholder="input search text" onChange={this.onSearch} style={{ width: 500 }} />
-                    <span><Icon type={this.state.displayType === "grid" ? "appstore-o" : "table"} /></span>
+                    <Search placeholder="input search text" className="staff-nav-search" onChange={this.onSearch} />
+                    <span><Icon onClick={this.changeDisplay} type={this.state.displayType ? "table" : "appstore-o"} /></span>
                 </div>
                 <Modal title="Add Teacher" visible={this.state.visible} onOk={this.handleOk} onCancel={this.showForm}
                     footer={[]}>
@@ -94,7 +102,7 @@ class StaffListComponent extends Component {
                     <button onClick={this.addTeacher}>Add Staff</button>
                 </Modal>
                 
-                {this.props.staff.listOfStaff ? <ListComponent listJSON={this.props.staff.listOfStaff} /> : ''}
+                {this.props.staff.listOfStaff ? (this.state.displayType ? <ListComponent listJSON={this.props.staff.listOfStaff} /> : <TableComponent listJSON={this.props.staff.listOfStaff} />) : '' }
             </div>
         )
     }

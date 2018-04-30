@@ -21,8 +21,6 @@ class StaffComponent extends Component {
     }
 
     enableEdit(event) {
-        debugger
-        event.stopPropagation();
         this.setState({
             isEdit: !this.state.isEdit
         });
@@ -53,7 +51,7 @@ class StaffComponent extends Component {
                                 <Row>
                                     <Col xs="3" sm="3">Name: </Col>
                                     <Col xs="9" sm="9">
-                                        {this.state.isEdit ? <input type="text" value={selectedTeacher.name} /> : (<text>{selectedTeacher.name}</text>)}
+                                        {this.state.isEdit ? <input type="text" name="name" value={selectedTeacher.name} /> : (<text>{selectedTeacher.name}</text>)}
                                     </Col>
                                 </Row>
                             </span>
@@ -61,7 +59,7 @@ class StaffComponent extends Component {
                                 <Row>
                                     <Col xs="3" sm="3">Qualification: </Col>
                                     <Col xs="9" sm="9">
-                                        {this.state.isEdit ? <input type="text" value={selectedTeacher.name} /> : (<text>{selectedTeacher.qualification}</text>)}
+                                        {this.state.isEdit ? <input type="text" name="qualification" value={selectedTeacher.qualification} /> : (<text>{selectedTeacher.qualification}</text>)}
                                     </Col>
                                 </Row>
                             </span>
@@ -69,7 +67,7 @@ class StaffComponent extends Component {
                                 <Row>
                                     <Col xs="3" sm="3">Joining Date: </Col>
                                     <Col xs="9" sm="9">
-                                        {this.state.isEdit ? <input type="text" value={selectedTeacher.name} /> : (<text>{selectedTeacher.qualification}</text>)}
+                                        {this.state.isEdit ? <input type="text" name="joindate" value={selectedTeacher.name} /> : (<text>{selectedTeacher.qualification}</text>)}
                                     </Col>
                                 </Row>
                             </span>
@@ -94,7 +92,7 @@ class StaffComponent extends Component {
                                     <Col xs="3" sm="3">
                                         {this.state.isEdit ?
                                             <button type="submit">Update</button> :
-                                            <button onClick={this.enableEdit}>Edit</button>}
+                                            <input type="button" onClick={this.enableEdit} value="Edit" />}
                                     </Col>
                                     <Col xs="9" sm="9"><button onClick={this.removeRecord}>Remove Record</button></Col>
                                 </Row>
