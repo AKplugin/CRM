@@ -12,20 +12,33 @@ class ListComponent extends Component {
     }
 
     render() {
-        let staffDOM = '';
+        let staffData = [];
         let columns = [{
             title: 'S.No',
             key: 'sno',
+            dataIndex: 'sno'            
         }, {
             title: 'Name',
             key: 'name',
+            dataIndex: 'name',
+            render: (text, record) => <Link to={`/staff/${record.id}`}>{text}</Link>
+        }, {
+            title: 'Qualification',
+            key: 'qualification',
+            dataIndex: 'qualification'
         }];
-        let data = [{
-            sno: 1,
-            name: 'name'
-        }]
+        
+        this.props.listJSON.map((element, index) => {
+            staffData.push({
+                sno: index+1,
+                name: element.name,
+                qualification: element.qualification,
+                id: element._id
+            });
+        });
+
         return (
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={staffData} />
         )
     }
 }
