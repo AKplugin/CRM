@@ -61,9 +61,13 @@ module.exports = (app) => {
     });
 
     app.post('/api/remove-staff', (req, res) => {
-        console.log(req.body)
         Teacher.findByIdAndRemove(req.body.id)
-            .then(teacher => res.json({ status: 'removed' }));
+            .then(teacher => {
+                Teacher.find({})
+                    .then(teacher => {
+                        res.json({ status: 'removed', listOfStaffs: teacher })
+                    })
+            });
     });
 
     // app.post('/api/search-teacher', (req, res) => {
