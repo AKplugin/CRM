@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class SidebarComponent extends Component {
     constructor(props) {
@@ -19,8 +20,12 @@ class SidebarComponent extends Component {
         return (
             <div className="side-bar">
                 <ul>
-                    <li>Staffs</li>
-                    <li>Events</li>
+                    <li>
+                        <Link to="/dashboard">Staffs</Link>
+                    </li>
+                    <li>
+                        <Link to="/events">Events</Link>
+                    </li>
                     <li>Classes</li>
                 </ul>
             </div>

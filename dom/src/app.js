@@ -6,6 +6,7 @@ import LoginComponent from './layouts/loginComponent';
 import DashboardComponent from './layouts/dashboardComponent';
 import StaffComponent from './layouts/staffComponent';
 import StaffListComponent from './layouts/components/staffListComponent';
+import EventComponent from './layouts/Events/EventComponent';
 
 class App extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class App extends Component {
                             <DashboardComponent>
                                 <Route exact path="/dashboard" component={StaffListComponent} />
                                 <Route exact path="/staff/:id" component={StaffComponent} />
+                                <Route exact path="/events" component={EventComponent} />
                             </DashboardComponent>
                         </Switch>
                     </div>

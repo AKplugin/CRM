@@ -13,9 +13,9 @@ class DashboardComponent extends Component {
     }
 
     render() {
-        if (!this.props.staff.user) {
-            <Redirect to="/login" />
-        }
+        // if (!this.props.staff.user) {
+        //     return <Redirect to="/login" />
+        // }
         return (
             <div>
                 <div className="nav-bar-element">
