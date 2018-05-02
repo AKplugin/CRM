@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Input, Button, Icon, Modal, Form, notification } from 'antd';
+import { connect } from 'react-redux';
+import * as eventActions from '../../actions/eventAction';
 const Search = Input.Search;
 const { Item } = Form;
+const { TextArea } = Input;
 
 class EventComponent extends Component {
     constructor(props) {
@@ -20,6 +23,11 @@ class EventComponent extends Component {
         this.showForm = this.showForm.bind(this);
         this.changeDisplay = this.changeDisplay.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
+        this.addEvent = this.addEvent.bind(this);
+    }
+
+    addEvent(){
+        this.props.addEvent(this.state.eventDetails);
     }
 
     changeDisplay() {
@@ -35,10 +43,10 @@ class EventComponent extends Component {
     }
 
     onValueChange(event) {
-        const { teacherDetails } = this.state;
-        teacherDetails[event.target.id] = event.target.value;
+        const { eventDetails } = this.state;
+        eventDetails[event.target.id] = event.target.value;
         this.setState({
-            teacherDetails
+            eventDetails
         });
     }
 
@@ -56,12 +64,12 @@ class EventComponent extends Component {
                         <Input type='text' id="name" value={eventDetails.name} onChange={this.onValueChange} placeholder="Enter the event name" />
                     </Item>
                     <Item>
-                        <Input type='text' id="description" value={eventDetails.description} onChange={this.onValueChange} placeholder="Enter the event description" />
+                        <TextArea rows={6} id="description" value={eventDetails.description} onChange={this.onValueChange} placeholder="Enter the event description" />
                     </Item>
                     <Item>
-                        <Input type='text' id="startdate" value={eventDetails.startdate} onChange={this.onValueChange} placeholder="Enter the event start date" />
+                        <Input type='text' id="organiser" value={eventDetails.organiser} onChange={this.onValueChange} placeholder="Enter the event organiser" />
                     </Item>
-                    <button onClick={this.addTeacher}>Add Event</button>
+                    <button onClick={this.addEvent}>Add Event</button>
                 </Modal>
 
             </div>
@@ -69,4 +77,4 @@ class EventComponent extends Component {
     }
 }
 
-export default EventComponent;
+export default connect(null, eventActions)(EventComponent);
