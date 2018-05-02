@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import * as actions from './actions';
 import LoginComponent from './layouts/loginComponent';
 import DashboardComponent from './layouts/dashboardComponent';
-import StaffComponent from './layouts/staffComponent';
 import StaffListComponent from './layouts/components/staffListComponent';
 import EventComponent from './layouts/Events/EventComponent';
 
@@ -14,22 +13,28 @@ class App extends Component {
         if (localStorage.getItem('Authorization')) {
             this.props.storeUser(localStorage.getItem('Authorization'));
         }
+
     }
 
     render() {
+        let fakeAuth = '';
+        const ProtectedRoute = ({ Component = Component, ...rest, auth = auth }) => {
+            if (auth) {
+                return <Route exact {...rest} render={() => <Component />} />
+            } else {
+                return <Redirect path="/login" />
+            }
+        }
+
         return (
             <div className="rootLayout">
                 <BrowserRouter>
                     <div className="rootLayout">
                         <Switch>
-                            <Route exact path='/' render={() => (
-                                this.props.staff.user ? (<Redirect to="/dashboard" />) : (<LoginComponent />)
-                            )} />
                             <Route exact path="/login" component={LoginComponent} />
                             <DashboardComponent>
-                                <Route exact path="/dashboard" component={StaffListComponent} />
-                                <Route exact path="/staff/:id" component={StaffComponent} />
-                                <Route exact path="/events" component={EventComponent} />
+                                <ProtectedRoute path="/dashboard" Component={StaffListComponent} />
+                                <ProtectedRoute path="/events" Component={EventComponent} />
                             </DashboardComponent>
                         </Switch>
                     </div>

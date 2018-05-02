@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { Form, Icon, Input, Button } from 'antd';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -16,9 +17,9 @@ class LoginComponent extends Component {
     }
 
     fireLogin(e) {
-        if(this.state.useremail && this.state.password){
+        if (this.state.useremail && this.state.password) {
             this.props.fetchLogin(this.state);
-        }else{
+        } else {
             alert("Enter the correct details")
         }
     }
@@ -41,9 +42,13 @@ class LoginComponent extends Component {
     }
 
     componentWillMount() {
+
     }
 
     render() {
+        if (this.props.staff.user) {
+            return <Redirect to="/dashboard" />
+        }
         return (
             <div className="formLayout">
                 <Form className="login-form" method="post">
@@ -65,8 +70,8 @@ class LoginComponent extends Component {
     }
 }
 
-function mapStateToProps(item){
-    return {staff: item.staff};
+function mapStateToProps(item) {
+    return { staff: item.staff };
 }
 
 export default connect(mapStateToProps, actions)(LoginComponent);
