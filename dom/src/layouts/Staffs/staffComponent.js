@@ -39,9 +39,9 @@ class StaffComponent extends Component {
 
     render() {
         let templateRender = '';
+        const { selectedTeacher } = this.props.staff;
 
         if (this.props.staff.selectedTeacher) {
-            const { selectedTeacher } = this.props.staff;
             templateRender = <Container>
                 <form onSubmit={() => this.updateDetails}>
                     <Row>
@@ -51,12 +51,12 @@ class StaffComponent extends Component {
                         <Col className="detail-list">
                             <span className="staff-name">
                                 <Row>
-                                    <Col xs="3" sm="3">Name: </Col>
+                                    <Col xs="2" sm="2">Name: </Col>
                                     <Col xs="3" sm="3">
                                         <Input name="name" value={selectedTeacher.name} />
                                     </Col>
-                                    
-                                    <Col xs="3" sm="3">Gender: </Col>
+
+                                    <Col xs="2" sm="2">Gender: </Col>
                                     <Col xs="3" sm="3">
                                         <Select name="gender" value={selectedTeacher.gender}>
                                             <Option value="male">Male</Option>
@@ -67,12 +67,12 @@ class StaffComponent extends Component {
                             </span>
                             <span className="staff-qualification">
                                 <Row>
-                                    <Col xs="3" sm="3">Qualification: </Col>
+                                    <Col xs="2" sm="2">Qualification: </Col>
                                     <Col xs="3" sm="3">
                                         <Input name="qualification" value={selectedTeacher.qualification} />
                                     </Col>
 
-                                    <Col xs="3" sm="3">Joining Date: </Col>
+                                    <Col xs="2" sm="2">Joining Date: </Col>
                                     <Col xs="3" sm="3">
                                         <DatePicker format="YYYY-MM-DD" />
                                     </Col>
@@ -80,23 +80,23 @@ class StaffComponent extends Component {
                             </span>
                             <span className="staff-qualification">
                                 <Row>
-                                    <Col xs="3" sm="3">Total Experience: </Col>
-                                    <Col xs="9" sm="9">
+                                    <Col xs="2" sm="2">Total Experience: </Col>
+                                    <Col xs="8" sm="8">
                                         <Input name="experience" value={selectedTeacher.experience} />
                                     </Col>
                                 </Row>
                             </span>
                             <span className="staff-qualification">
                                 <Row>
-                                    <Col xs="3" sm="3">Address: </Col>
-                                    <Col xs="9" sm="9">
+                                    <Col xs="2" sm="2">Address: </Col>
+                                    <Col xs="8" sm="8">
                                         <TextArea rows={6} name="address" value={selectedTeacher.address} />
                                     </Col>
                                 </Row>
                             </span>
                             <span className="staff-qualification">
                                 <Row>
-                                    <Col xs="3" sm="3">
+                                    <Col xs="2" sm="2">
                                         {this.state.isEdit ?
                                             <button type="submit">Update</button> :
                                             <input type="button" onClick={this.enableEdit} value="Edit" />}
@@ -116,7 +116,7 @@ class StaffComponent extends Component {
                     <Breadcrumb>
                         <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
                         <BreadcrumbItem><Link to="/dashboard">Staffs</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>Data</BreadcrumbItem>
+                        <BreadcrumbItem active>{selectedTeacher.name}</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
                 <div>

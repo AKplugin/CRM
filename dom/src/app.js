@@ -7,6 +7,7 @@ import LoginComponent from './layouts/loginComponent';
 import DashboardComponent from './layouts/dashboardComponent';
 import StaffListComponent from './layouts/Staffs/staffListComponent';
 import StaffComponent from './layouts/Staffs/staffComponent';
+import EventComponent from './layouts/Events/EventComponent';
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
                             <DashboardComponent>
                                 <Route path="/dashboard" component={StaffListComponent} />
                                 <Route exact path="/staff/:id" component={StaffComponent} />
+                                <Route exact path="/events" component={EventComponent} />
                             </DashboardComponent>
                         </Switch>
                     </div>

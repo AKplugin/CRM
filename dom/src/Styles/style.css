@@ -55,10 +55,6 @@
 .Main_layout li:last-child {
   float: right; }
 
-.detail-list span {
-  display: block;
-  margin: 15px 0; }
-
 /**
 *  CSS for the Side Bar Components
 */
@@ -89,7 +85,10 @@
   float: left;
   background-color: #fff; }
   .dashboard-area-element .detail-list {
-    font-size: 14px; }
+    font-size: 12px; }
+    .dashboard-area-element .detail-list span {
+      display: block;
+      margin: 15px 0; }
   .dashboard-area-element .staff-nav-bar {
     margin: 8px 0;
     width: 100%;
@@ -110,3 +109,5 @@
   left: 0;
   right: 0;
   overflow-y: auto; }
+  .staff-area-element .row {
+    align-items: center; }
