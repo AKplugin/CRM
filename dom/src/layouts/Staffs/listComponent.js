@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
-import { Input, Select, Icon, Avatar, Popconfirm, message, Modal, notification, Card, Col, Row, Form } from 'antd';
+import { Icon, Avatar, Card, Col, Row } from 'antd';
 const { Meta } = Card;
-const Search = Input.Search;
-const { Item } = Form;
 
 class ListComponent extends Component {
 
@@ -23,7 +21,6 @@ class ListComponent extends Component {
 
     render() {
         let staffDOM = '';
-        const { teacherDetails } = this.state;
 
         staffDOM = this.props.listJSON.map((element) => {
             return <Col span={6} key={element._id}>

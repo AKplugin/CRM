@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import StaffListComponent from './components/staffListComponent';
 import Navigation from './components/navigation';
 import SidebarComponent from './components/sidebarComponent';
 
@@ -13,9 +11,6 @@ class DashboardComponent extends Component {
     }
 
     render() {
-        if (!this.props.staff.user) {
-            return <Redirect to="/login" />
-        }
         return (
             <div>
                 <div className="nav-bar-element">

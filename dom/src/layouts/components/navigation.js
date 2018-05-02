@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
-import { Input, Button, Avatar, Popconfirm, Select } from 'antd';
+import { Button } from 'antd';
 import {
     Collapse,
     Navbar,
     NavbarToggler,
     NavbarBrand,
     Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
+    NavItem
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
-const Option = Select.Option;
+import * as actions from '../../actions/authAction';
 
 class Navigation extends Component {
     constructor(props) {
@@ -28,9 +22,9 @@ class Navigation extends Component {
     }
 
     toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
+        // this.setState({
+        //     isOpen: !this.state.isOpen
+        // });
     }
 
     logout() {

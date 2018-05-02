@@ -7,13 +7,6 @@ class SidebarComponent extends Component {
         this.state = {
             collapsed: false
         };
-        this.toggleCollapsed = this.toggleCollapsed.bind(this);
-    }
-
-    toggleCollapsed = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        });
     }
 
     render() {

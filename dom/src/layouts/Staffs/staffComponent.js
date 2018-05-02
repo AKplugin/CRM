@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as actions from '../actions';
+import * as actions from '../../actions';
+import { Input, Select, DatePicker } from 'antd';
 import { Container, Row, Col, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+const Option = Select.Option;
+const { TextArea } = Input;
 
 class StaffComponent extends Component {
     constructor(props) {
@@ -27,7 +30,6 @@ class StaffComponent extends Component {
     }
 
     updateDetails(event) {
-        debugger
         this.props.updateStaff();
     }
 
@@ -50,24 +52,29 @@ class StaffComponent extends Component {
                             <span className="staff-name">
                                 <Row>
                                     <Col xs="3" sm="3">Name: </Col>
-                                    <Col xs="9" sm="9">
-                                        {this.state.isEdit ? <input type="text" name="name" value={selectedTeacher.name} /> : (<text>{selectedTeacher.name}</text>)}
+                                    <Col xs="3" sm="3">
+                                        <Input name="name" value={selectedTeacher.name} />
+                                    </Col>
+                                    
+                                    <Col xs="3" sm="3">Gender: </Col>
+                                    <Col xs="3" sm="3">
+                                        <Select name="gender" value={selectedTeacher.gender}>
+                                            <Option value="male">Male</Option>
+                                            <Option value="female">Female</Option>
+                                        </Select>
                                     </Col>
                                 </Row>
                             </span>
                             <span className="staff-qualification">
                                 <Row>
                                     <Col xs="3" sm="3">Qualification: </Col>
-                                    <Col xs="9" sm="9">
-                                        {this.state.isEdit ? <input type="text" name="qualification" value={selectedTeacher.qualification} /> : (<text>{selectedTeacher.qualification}</text>)}
+                                    <Col xs="3" sm="3">
+                                        <Input name="qualification" value={selectedTeacher.qualification} />
                                     </Col>
-                                </Row>
-                            </span>
-                            <span className="staff-qualification">
-                                <Row>
+
                                     <Col xs="3" sm="3">Joining Date: </Col>
-                                    <Col xs="9" sm="9">
-                                        {this.state.isEdit ? <input type="text" name="joindate" value={selectedTeacher.name} /> : (<text>{selectedTeacher.qualification}</text>)}
+                                    <Col xs="3" sm="3">
+                                        <DatePicker format="YYYY-MM-DD" />
                                     </Col>
                                 </Row>
                             </span>
@@ -75,7 +82,7 @@ class StaffComponent extends Component {
                                 <Row>
                                     <Col xs="3" sm="3">Total Experience: </Col>
                                     <Col xs="9" sm="9">
-                                        {this.state.isEdit ? <input type="text" value={selectedTeacher.qualification} /> : (<text>{selectedTeacher.qualification}</text>)}
+                                        <Input name="experience" value={selectedTeacher.experience} />
                                     </Col>
                                 </Row>
                             </span>
@@ -83,7 +90,7 @@ class StaffComponent extends Component {
                                 <Row>
                                     <Col xs="3" sm="3">Address: </Col>
                                     <Col xs="9" sm="9">
-                                        {this.state.isEdit ? <input type="text" value={selectedTeacher.qualification} /> : (<text>{selectedTeacher.qualification}</text>)}
+                                        <TextArea rows={6} name="address" value={selectedTeacher.address} />
                                     </Col>
                                 </Row>
                             </span>
@@ -104,7 +111,7 @@ class StaffComponent extends Component {
         }
 
         return (
-            <div>
+            <div className="staff-area-element">
                 <div className="bread-nav">
                     <Breadcrumb>
                         <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
@@ -114,13 +121,9 @@ class StaffComponent extends Component {
                 </div>
                 <div>
                     <div>
-
-                    </div>
-                    <div>
                         {templateRender}
                     </div>
                 </div>
-
             </div>
         )
     }

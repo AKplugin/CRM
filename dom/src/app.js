@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import * as actions from './actions';
 import LoginComponent from './layouts/loginComponent';
 import DashboardComponent from './layouts/dashboardComponent';
-import StaffListComponent from './layouts/components/staffListComponent';
-import EventComponent from './layouts/Events/EventComponent';
+import StaffListComponent from './layouts/Staffs/staffListComponent';
+import StaffComponent from './layouts/Staffs/staffComponent';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        if (localStorage.getItem('Authorization')) {
-            this.props.storeUser(localStorage.getItem('Authorization'));
-        }
-
-    }
 
     render() {
-        let fakeAuth = '';
-        const ProtectedRoute = ({ Component = Component, ...rest, auth = auth }) => {
-            if (auth) {
-                return <Route exact {...rest} render={() => <Component />} />
-            } else {
-                return <Redirect path="/login" />
-            }
+
+        if (localStorage.getItem('Authorization') && !axios.defaults.headers.common['Authorization']) {
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('Authorization');
+            // this.props.storeUser(axios.defaults.headers.common['Authorization']);
         }
 
         return (
@@ -33,8 +24,8 @@ class App extends Component {
                         <Switch>
                             <Route exact path="/login" component={LoginComponent} />
                             <DashboardComponent>
-                                <ProtectedRoute path="/dashboard" Component={StaffListComponent} />
-                                <ProtectedRoute path="/events" Component={EventComponent} />
+                                <Route path="/dashboard" component={StaffListComponent} />
+                                <Route exact path="/staff/:id" component={StaffComponent} />
                             </DashboardComponent>
                         </Switch>
                     </div>

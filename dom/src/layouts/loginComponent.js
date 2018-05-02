@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Form, Icon, Input, Button } from 'antd';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import * as actions from '../actions/authAction';
 const FormItem = Form.Item;
 
 class LoginComponent extends Component {
@@ -39,10 +39,6 @@ class LoginComponent extends Component {
             default:
                 break;
         }
-    }
-
-    componentWillMount() {
-
     }
 
     render() {

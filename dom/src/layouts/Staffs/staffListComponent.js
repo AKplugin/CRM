@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
-import { Input, Button, Select, Icon, Avatar, Popconfirm, message, Modal, notification, Card, Col, Row, Form } from 'antd';
+import { Input, Button, Icon, Modal, Form, notification } from 'antd';
 import ListComponent from '../Staffs/listComponent';
 import TableComponent from '../Staffs/tableComponent';
-const { Meta } = Card;
 const Search = Input.Search;
 const { Item } = Form;
 
