@@ -24,25 +24,48 @@ class EventComponent extends Component {
                 enddate: '',
                 organiser: ''
             },
-            displayType: true
+            displayType: true,
+            isDeleted: false
         };
         this.showForm = this.showForm.bind(this);
         this.changeDisplay = this.changeDisplay.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
         this.addEvent = this.addEvent.bind(this);
+        this.deleteEvent = this.deleteEvent.bind(this);
+    }
+
+    deleteEvent(event) {
+        this.props.deleteEvent(event.target.id);
+        this.setState({ isDeleted: !this.state.isDeleted });
     }
 
     componentWillReceiveProps(prev, next) {
-        if (prev.events.statusMsg && prev.events.statusMsg === 'success' && this.state.visible) {
-            this.setState({
-                visible: false
-            });
-            const openNotificationWithIcon = (type) => {
-                notification[type]({
-                    message: 'Added the event successfully.'
-                });
-            };
-            openNotificationWithIcon('success');
+        switch (prev.events.statusMsg) {
+            case 'success':
+                if (this.state.visible) {
+                    this.setState({
+                        visible: false
+                    });
+                    const openNotificationWithIcon = (type) => {
+                        notification[type]({
+                            message: 'Added the event successfully.'
+                        });
+                    };
+                    openNotificationWithIcon('success');
+                }
+                break;
+            case 'deleted':
+                if (this.state.isDeleted) {
+                    this.setState({
+                        isDeleted: false
+                    });
+                    const openNotificationWithIcon = (type) => {
+                        notification[type]({
+                            message: 'Removed the event successfully.'
+                        });
+                    };
+                    openNotificationWithIcon('error');
+                }
         }
     }
 
@@ -86,7 +109,7 @@ class EventComponent extends Component {
                 renderItem={item => (
                     <List.Item
                         key={item.name}
-                        extra={<Icon type="close" onClick={this.deleteEvent}/>}
+                        extra={<Icon type="delete" id={item._id} onClick={this.deleteEvent} />}
                     >
                         <List.Item.Meta
                             title={<a href={item.href}>{item.name}</a>}

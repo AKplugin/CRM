@@ -17,3 +17,12 @@ export const fetchEvents = () => {
             });
     }
 }
+
+export const deleteEvent = (id) => {
+    return (dispatch) => {
+        axios.post('http://localhost:5000/api/delete-event', {id: id})
+            .then(res => {
+                dispatch({ type: 'FETCH_EVENT', payload: res.data });
+            })
+    }
+}

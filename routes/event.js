@@ -21,4 +21,17 @@ module.exports = (app) => {
             })
         })
     });
+
+    app.post('/api/delete-event', (req, res) => {
+        Event.findByIdAndRemove(req.body.id)
+            .then(resp => {
+                Event.find({})
+                    .then(events => {
+                        res.json({
+                            statusMsg: "deleted",
+                            listOfEvents: events
+                        });
+                    })
+            })
+    });
 }
