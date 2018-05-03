@@ -26,7 +26,21 @@ class EventComponent extends Component {
         this.addEvent = this.addEvent.bind(this);
     }
 
-    addEvent(){
+    componentWillReceiveProps(prev, next) {
+        if (prev.events.statusMsg && prev.events.statusMsg === 'success' && this.state.visible) {
+            this.setState({
+                visible: false
+            });
+            const openNotificationWithIcon = (type) => {
+                notification[type]({
+                    message: 'Added the event successfully.'
+                });
+            };
+            openNotificationWithIcon('success');
+        }
+    }
+
+    addEvent() {
         this.props.addEvent(this.state.eventDetails);
     }
 
@@ -77,4 +91,8 @@ class EventComponent extends Component {
     }
 }
 
-export default connect(null, eventActions)(EventComponent);
+const mapStateToProps = (props) => {
+    return { events: { ...props.events } }
+}
+
+export default connect(mapStateToProps, eventActions)(EventComponent);
