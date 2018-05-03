@@ -135,3 +135,23 @@ $dashboard-bg-color: #fff;
         align-items: center;
     }
 }
+
+.events-container{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    .events-navigation{
+        display: flex;
+        flex: 0.5;
+    }
+    .events-dom-container{
+        margin: 5px 30px;
+        display: flex;
+        flex: 4;
+        overflow-y: scroll;
+    }
+}

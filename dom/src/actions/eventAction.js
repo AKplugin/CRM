@@ -8,3 +8,12 @@ export const addEvent = (data) => {
             });
     }
 }
+
+export const fetchEvents = () => {
+    return (dispatch) => {
+        axios.get('http://localhost:5000/api/get-event')
+            .then(res => {
+                dispatch({ type: 'FETCH_EVENT', payload: res.data });
+            });
+    }
+}

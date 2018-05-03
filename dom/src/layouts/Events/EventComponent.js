@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { Input, Button, Icon, Modal, Form, notification } from 'antd';
+import { Input, Button, Icon, Modal, Form, notification, List } from 'antd';
 import { connect } from 'react-redux';
 import * as eventActions from '../../actions/eventAction';
 const Search = Input.Search;
 const { Item } = Form;
 const { TextArea } = Input;
+const IconText = ({ type, text }) => (
+    <span>
+        <Icon type={type} style={{ marginRight: 8 }} />
+        {text}
+    </span>
+);
 
 class EventComponent extends Component {
     constructor(props) {
@@ -64,14 +70,38 @@ class EventComponent extends Component {
         });
     }
 
+    componentWillMount() {
+        this.props.fetchEvents();
+    }
+
     render() {
         const { eventDetails } = this.state;
+        let eventDOM = '';
+        if (this.props.events) {
+            const { listOfEvents } = this.props.events;
+            eventDOM = <List
+                itemLayout="vertical"
+                size="large"
+                dataSource={listOfEvents}
+                renderItem={item => (
+                    <List.Item
+                        key={item.name}
+                        extra={<Icon type="close" onClick={this.deleteEvent}/>}
+                    >
+                        <List.Item.Meta
+                            title={<a href={item.href}>{item.name}</a>}
+                            description={item.description}
+                        />
+                    </List.Item>)
+                } />
+        }
 
         return (
-            <div>
-                Events
-                <Button type="primary" icon="schedule" onClick={this.showForm}>Add Event</Button>
-
+            <div className="events-container">
+                <div className="events-navigation">
+                    Events
+                    <Button type="primary" icon="schedule" onClick={this.showForm}>Add Event</Button>
+                </div>
                 <Modal title="Add Staff" visible={this.state.visible} onOk={this.handleOk} onCancel={this.showForm}
                     footer={[]}>
                     <Item>
@@ -85,7 +115,9 @@ class EventComponent extends Component {
                     </Item>
                     <button onClick={this.addEvent}>Add Event</button>
                 </Modal>
-
+                <div className="events-dom-container">
+                    {eventDOM}
+                </div>
             </div>
         );
     }

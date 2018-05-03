@@ -12,4 +12,13 @@ module.exports = (app) => {
             })
         })
     });
+
+    app.get('/api/get-event', (req, res) => {
+        Event.find({}).then(events => {
+            res.json({
+                statusMsg: false,
+                listOfEvents: events
+            })
+        })
+    });
 }
